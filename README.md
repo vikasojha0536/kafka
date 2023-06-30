@@ -45,3 +45,7 @@ Topic: my-topic Partition: 2    Leader: 2       Replicas: 2,1,0 Isr: 2,1,0
 
 ## Alter the partition
 .\bin\windows\kafka-topics.bat --bootstrap-server localhost:9092 --alter --topic my-topic-3 --partition 4
+
+## Notes
+If we have 4 consumers in one consumer group with 3 partitions and listening to one topic one consumer will be idle
+If we have 2 consumers in one consumer group with 4 partitions and listening to one topic both the consumers will listen to two partitions each
