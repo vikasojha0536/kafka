@@ -13,14 +13,17 @@ public class KafkaConsumerAssignApp {
 
     public static void main(String[] args) {
         Properties properties = new Properties();
-        properties.put("bootstrap.servers", "localhost:9092,localhost:9093,localhost:9094");
+        properties.put("bootstrap.servers", "");
+        properties.put("security.protocol", "SASL_SSL");
+        properties.put("sasl.jaas.config", "");
+        properties.put("sasl.mechanism", "PLAIN");
+        properties.put("client.dns.lookup", "use_all_dns_ips");
         properties.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
         properties.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
-
         try(KafkaConsumer<String, String> kafkaConsumer = new KafkaConsumer<>(properties)) {
         List<TopicPartition> partitions =  new ArrayList<>();
-        TopicPartition partition0 = new TopicPartition("my-topic-3", 0);
-        TopicPartition partition1 = new TopicPartition("my-topic-4", 2);
+        TopicPartition partition0 = new TopicPartition("my-topic", 0);
+        TopicPartition partition1 = new TopicPartition("my-topic", 2);
         partitions.add(partition0);
         partitions.add(partition1);
         kafkaConsumer.assign(partitions);

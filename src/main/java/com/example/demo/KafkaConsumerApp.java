@@ -12,7 +12,7 @@ public class KafkaConsumerApp {
 
     public static void main(String[] args) {
         Properties properties = new Properties();
-        properties.put("bootstrap.servers", "<host>:9092");
+        properties.put("bootstrap.servers", "");
         properties.put("security.protocol", "SASL_SSL");
         properties.put("sasl.jaas.config", "");
         properties.put("sasl.mechanism", "PLAIN");
@@ -28,8 +28,8 @@ public class KafkaConsumerApp {
             while(true){
                 ConsumerRecords<String, String> records = kafkaConsumer.poll(10);
                 for(ConsumerRecord<String, String> record: records) {
-                    System.out.println(String.format("Topic %s, partition: %d, key: %s, value: %s",
-                                                     record.topic(), record.partition(), record.key(), record.value()));
+                    System.out.printf("Topic %s, partition: %d, key: %s, value: %s%n",
+                                      record.topic(), record.partition(), record.key(), record.value());
                 }
             }
         }
