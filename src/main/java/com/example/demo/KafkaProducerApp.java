@@ -16,11 +16,12 @@ public class KafkaProducerApp {
         properties.put("sasl.jaas.config", "");
         properties.put("sasl.mechanism", "PLAIN");
         properties.put("client.dns.lookup", "use_all_dns_ips");
-        properties.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
+        properties.put("value.serializer", "com.example.demo.CustomSerializer");
         properties.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
-        try (KafkaProducer<String, String> kafkaProducer = new KafkaProducer<>(properties)) {
-            for (int i = 0; i < 1; i++) {
-                Future<RecordMetadata> metadata = kafkaProducer.send(new ProducerRecord<>("my-topic", Integer.toString(i), "My message " + i));
+        try (KafkaProducer<String, MessageDTO> kafkaProducer = new KafkaProducer<>(properties)) {
+            for (int i = 0; i < 5; i++) {
+                MessageDTO messageDTO = new MessageDTO().setMessage("my message "+i).setVersion("v"+i);
+                Future<RecordMetadata> metadata = kafkaProducer.send(new ProducerRecord<>("my-topic", Integer.toString(i), messageDTO));
                 RecordMetadata recordMetadata = metadata.get();
                 System.out.printf("Partition %s, offset %s%n", recordMetadata.partition(), recordMetadata.offset());
             }
