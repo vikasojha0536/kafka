@@ -22,4 +22,13 @@ public class MessageDTO {
         this.version = version;
         return this;
     }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("MessageDTO{");
+        sb.append("message='").append(message).append('\'');
+        sb.append(", version='").append(version).append('\'');
+        sb.append('}');
+        return sb.toString();
+    }
 }
