@@ -1,3 +1,4 @@
+/*
 package com.example.demo;
 
 import org.apache.kafka.clients.CommonClientConfigs;
@@ -52,3 +53,4 @@ public class KafkaConsumerConfig {
     }
 }
 
+*/
