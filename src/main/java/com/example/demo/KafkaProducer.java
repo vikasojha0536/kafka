@@ -17,12 +17,13 @@ public class KafkaProducer {
     @Autowired
     private KafkaTemplate<String, MessageDTO> kafkaTemplate;
 
-    public void sendMessage(MessageDTO messageDTO) throws ExecutionException, InterruptedException {
+    public CompletableFuture<SendResult<String, MessageDTO>> sendMessage(MessageDTO messageDTO) throws ExecutionException, InterruptedException {
         Message<MessageDTO> message = MessageBuilder.withPayload(messageDTO)
                 .setHeader(KafkaHeaders.TOPIC, "my-topic")
                 .build();
             CompletableFuture<SendResult<String, MessageDTO>> result = kafkaTemplate.send(message);
             System.out.println("result " + result.get().getProducerRecord().partition());
+            return result;
 
     }
 

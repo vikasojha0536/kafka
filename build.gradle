@@ -20,7 +20,8 @@ dependencies {
 	implementation 'org.springframework.kafka:spring-kafka'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.2'
-
+	testImplementation ('org.springframework.kafka:spring-kafka-test')
+	testImplementation 'org.awaitility:awaitility:4.2.0'
 
 }
 
