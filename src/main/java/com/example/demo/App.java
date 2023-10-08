@@ -19,7 +19,16 @@ public class App implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        MessageDTO messageDTO = new MessageDTO().setMessage("my-message").setVersion("v1");
-        kafkaProducer.sendMessage(messageDTO);
+        KafkaProductOrder kafkaProductOrder = KafkaProductOrder.builder()
+                .id("56e164fc-6964-431f-aeef-518c648de979")
+                .publicIdentifier("2232088407")
+                .state(StateEnum.COMPLETED)
+                .businessProcess("addonManagement")
+//  TODO - in order item state change task
+//                    .orderItems(
+//                        orderEvent.getStateChanges() -- > individual items'list
+//                    )
+                .build();
+        kafkaProducer.sendMessage(kafkaProductOrder);
     }
 }

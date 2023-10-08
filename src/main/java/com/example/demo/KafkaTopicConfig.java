@@ -6,6 +6,7 @@ import org.apache.kafka.clients.admin.NewTopic;
 import org.apache.kafka.common.config.SaslConfigs;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
 import org.springframework.kafka.config.TopicBuilder;
 import org.springframework.kafka.core.KafkaAdmin;
 
@@ -24,6 +25,15 @@ public class KafkaTopicConfig {
 //        configs.put(SaslConfigs.SASL_MECHANISM, "PLAIN");
 //        configs.put(CommonClientConfigs.CLIENT_DNS_LOOKUP_CONFIG, "use_all_dns_ips");
 //        return new KafkaAdmin(configs);
+//    }
+
+//    @Bean
+//    public ConcurrentKafkaListenerContainerFactory<String, Map<String, String>> kafkaListener() {
+//        ConcurrentKafkaListenerContainerFactory<String, Map<String, String>> factory = new ConcurrentKafkaListenerContainerFactory<>();
+//      //  factory.setConsumerFactory(consumerFactory());
+//        factory.setBatchListener(true);
+//        factory.getContainerProperties().setIdleBetweenPolls(10000);
+//        return factory;
 //    }
 
     @Bean
