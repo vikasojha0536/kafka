@@ -21,7 +21,7 @@ import java.util.concurrent.ExecutionException;
 public class KafkaProducer {
 
     @Autowired
-    private KafkaTemplate<String, MessageDTO> kafkaTemplate;
+    private KafkaTemplate<String, KafkaProductOrder> kafkaTemplate;
 
     public void sendMessage(KafkaProductOrder kafkaProductOrder) throws ExecutionException, InterruptedException {
         MessageDTO messa = new MessageDTO().setMessage("tets").setVersion("1");
@@ -33,12 +33,12 @@ public class KafkaProducer {
         RecordHeader recordHeader = new RecordHeader("key","test".getBytes(StandardCharsets.UTF_8));
         headers.add(recordHeader);
         ProductOrderStateChangedEvent productOrderStateChangedEvent = new ProductOrderStateChangedEvent(kafkaProductOrder);
-        final ProducerRecord<String, MessageDTO> record =
-                new ProducerRecord<>("my-topic", null, 1L, "1", messa,headers);
+        final ProducerRecord<String, KafkaProductOrder> record =
+                new ProducerRecord<>("topic_7", null, 1L, "1", kafkaProductOrder,headers);
 
 
-        CompletableFuture<SendResult<String, MessageDTO>> result = kafkaTemplate.send(record);
-        System.out.println("result "+result.get().getProducerRecord().partition());
+        CompletableFuture<SendResult<String, KafkaProductOrder>> result = kafkaTemplate.send(record);
+        System.out.println("result "+result.get().getProducerRecord().value().getId());
 
     }
 

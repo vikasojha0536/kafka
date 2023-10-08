@@ -7,9 +7,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class KafkaConsumer {
 
-    @KafkaListener(topics = "my-topic", groupId = "group-id")
-    public void consume(@Payload MessageDTO messageDTO) {
-        System.out.printf("Message received -> %s%n", messageDTO.toString());
+    @KafkaListener(topics = "topic_7", groupId = "group-id")
+    public void consume(@Payload KafkaProductOrder kafkaProductOrder) {
+        System.out.printf("Message received -> %s%n", kafkaProductOrder.toString());
     }
 
 }
