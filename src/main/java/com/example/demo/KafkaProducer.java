@@ -34,7 +34,7 @@ public class KafkaProducer {
         headers.add(recordHeader);
         ProductOrderStateChangedEvent productOrderStateChangedEvent = new ProductOrderStateChangedEvent(kafkaProductOrder);
         final ProducerRecord<String, KafkaProductOrder> record =
-                new ProducerRecord<>("topic_7", null, 1L, "1", kafkaProductOrder,headers);
+                new ProducerRecord<>("my-topic", null, 1L, "1", kafkaProductOrder,headers);
 
 
         CompletableFuture<SendResult<String, KafkaProductOrder>> result = kafkaTemplate.send(record);

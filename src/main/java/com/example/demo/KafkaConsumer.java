@@ -7,9 +7,16 @@ import org.springframework.stereotype.Service;
 @Service
 public class KafkaConsumer {
 
-    @KafkaListener(topics = "topic_7", groupId = "group-id")
-    public void consume(@Payload KafkaProductOrder kafkaProductOrder) {
-        System.out.printf("Message received -> %s%n", kafkaProductOrder.toString());
+    private ProductOrderStateChangedEvent messageDTO;
+
+    @KafkaListener(topics = "my-topic", groupId = "group-id")
+    public void consume(@Payload ProductOrderStateChangedEvent productOrderStateChangedEvent) {
+        this.messageDTO = productOrderStateChangedEvent;
+        System.out.printf("Message received -> %s%n", messageDTO.toString());
+    }
+
+    public ProductOrderStateChangedEvent getMessageDTO() {
+        return messageDTO;
     }
 
 }
