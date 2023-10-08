@@ -21,8 +21,8 @@ public class KafkaProducer {
         Message<MessageDTO> message = MessageBuilder.withPayload(messageDTO)
                 .setHeader(KafkaHeaders.TOPIC, "my-topic")
                 .build();
-        CompletableFuture<SendResult<String, MessageDTO>> result = kafkaTemplate.send(message);
-        System.out.println("result "+result.get().getProducerRecord().partition());
+            CompletableFuture<SendResult<String, MessageDTO>> result = kafkaTemplate.send(message);
+            System.out.println("result " + result.get().getProducerRecord().partition());
 
     }
 
